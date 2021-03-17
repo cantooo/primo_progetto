@@ -13,6 +13,13 @@ def contatti(request):
             print("COGNOME:", form.cleaned_data["cognome"])
             print("EMAIL:", form.cleaned_data["email"])
             print("CONTENUTO:", form.cleaned_data["contenuto"])
+            print("Salvo il contatto nel database")
+            nuovo_contatto = form.save()
+            print("New post:", nuovo_contatto)
+            print(nuovo_contatto.nome)
+            print(nuovo_contatto.cognome)
+            print(nuovo_contatto.email)
+            print(nuovo_contatto.contenuto)
 
             return HttpResponse("<h1>Grazie per averci contattato!</h1>")
     else:

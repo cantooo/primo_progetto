@@ -67,7 +67,8 @@ TEMPLATES = [
             os.path.join(BASE_DIR, "primo_progetto/templates"),
             os.path.join(BASE_DIR, "news/templates"),
             os.path.join(BASE_DIR, "libreria/templates"),
-            os.path.join(BASE_DIR, "forms_app/templates")
+            os.path.join(BASE_DIR, "forms_app/templates"),
+            os.path.join(BASE_DIR, "templates")
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -132,3 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

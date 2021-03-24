@@ -1,6 +1,9 @@
+from django.contrib.auth import authenticate, login
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, HttpResponse
-from .forms import FormContatto
+from .forms import FormContatto, FormRegistrazione
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -29,3 +32,21 @@ def contatti(request):
 
     context = {"form": form}
     return render(request, "contatto.html", context)
+
+
+def registrazioneView(request):
+    if request.method == "POST":
+        form = FormRegistrazione(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password1"]
+            User.objects.create_user(
+                username=username, password=password, email=email)
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect("/")
+    else:
+        form = FormRegistrazione()
+        context = {"form": form}
+        return render(request, "registrazione.html", context)

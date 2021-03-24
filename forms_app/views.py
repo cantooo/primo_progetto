@@ -1,9 +1,11 @@
 from django.shortcuts import render, HttpResponse
 from .forms import FormContatto
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 
+@login_required
 def contatti(request):
     if request.method == "POST":
         form = FormContatto(request.POST)

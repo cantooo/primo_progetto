@@ -26,4 +26,10 @@ def variabili(request):
 
 
 def index(request):
-    return render(request, "index.html")
+    visite = request.session.get("visite", 0)
+    request.session["visite"] = visite + 1
+    context = {"visite": visite}
+
+    return render(request, "index.html", context=context)
+
+    # return render(request, "index.html")
